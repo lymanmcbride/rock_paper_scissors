@@ -20,7 +20,6 @@ def analyze():
     computer_choice, user_choice = get_choices()
     if user_choice == computer_choice:
         print("You both chose {}!".format(user_choice))
-        #!!may want to add the round to the list once we set up the datastructure
         analyze()
     elif (user_choice == "rock" and computer_choice == "scissors") or (user_choice == "scissors" and computer_choice == "paper") or (user_choice == "paper" and computer_choice == "rock"):
         print ("You won! The computer chose {} and you chose {}.".format(computer_choice, user_choice))
@@ -35,8 +34,6 @@ def analyze():
         log.append([rounds_played, user_choice, computer_choice, "Computer"])
         last()
 def last():
-    print(game_win, rounds_played, user_wins, computer_wins)
-    #why cant I use boolean logic here?
     if (user_wins == game_win) or (computer_wins == game_win):
         if user_wins > computer_wins:
             print("\n\nYou won the whole game! Here are you stats:")
@@ -49,7 +46,7 @@ def last():
     else:
         if rounds_played == total_games:
             print("The next round is sudden death! Whoever wins will win the whole game!")
-        his = input("Would you like to see the game history? y/n").lower()
+        his = input("Would you like to see the game history? y/n\n").lower()
         if his == "y":
             history()
         analyze()
