@@ -32,31 +32,28 @@ def analyze():
         print ("You lost! The computer chose {} and you chose {}.".format(computer_choice, user_choice))
         rounds_played += 1
         computer_wins += 1
-        log.append([rounds_played, user_choice, computer_choice, "computer"])
+        log.append([rounds_played, user_choice, computer_choice, "Computer"])
         last()
 def last():
     print(game_win, rounds_played, user_wins, computer_wins)
-    if user_wins < game_win:
-        if computer_wins < game_win:
-            if rounds_played == total_games:
-                print("The next round is sudden death! Whoever wins will win the whole game!")
-            his = input("Would you like to see the game history? y/n").lower()
-            if his == "y":
-                history()
-            analyze()
+    #why cant I use boolean logic here?
+    if (user_wins == game_win) or (computer_wins == game_win):
+        if user_wins > computer_wins:
+            print("\n\nYou won the whole game! Here are you stats:")
         else:
-            if user_wins > computer_wins:
-                print("You won the whole game! Here are you stats:")
-                print("Your wins: {}\nComputer wins:{}\n".format(user_wins, computer_wins))
-                history()
-                quit = input("When you are done, please type quit").lower()
-                print("Thank you for playing our game!, have a nice day!")
-            else:
-                print("You lost the whole game! Here are the stats:")
-                print("Your wins: {}\nComputer wins:{}".format(user_wins, computer_wins))
-                history()
-                quit = input("When you are done, please type quit").lower()
-                print("Thank you for playing our game!, have a nice day!")
+            print("\n\nYou lost the whole game! Here are the stats:")
+        print("Your wins: {}\nComputer wins:{}".format(user_wins, computer_wins))
+        history()
+        quit = input("When you are done, please press enter")
+        print("Thank you for playing our game!, have a nice day!")
+    else:
+        if rounds_played == total_games:
+            print("The next round is sudden death! Whoever wins will win the whole game!")
+        his = input("Would you like to see the game history? y/n").lower()
+        if his == "y":
+            history()
+        analyze()
+
 
 #getting functions
 def get_choices():
@@ -66,12 +63,13 @@ def get_choices():
 def get_games():
     global total_games
     global game_win
+    global user
     user = input("What is your name?\n").title()
     total_games = int(input("How many games would you like to play to?\n"))
     game_win = (total_games//2) + 1
 def history():
     for list_element in log:
-        print("Game {}\nWinner: {}\nYou chose: {}\nComputer chose: {}\n\n".format(list_element[0], list_element[3], list_element[1], list_element[2]))
+        print("Round {}\nWinner: {}\nYou chose: {}\nComputer chose: {}\n\n".format(list_element[0], list_element[3], list_element[1], list_element[2]))
 
 
 main()
